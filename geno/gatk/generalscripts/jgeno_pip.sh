@@ -1,0 +1,1 @@
+/home/jelmer/Dropbox/sc_lemurs/scripts/geno/gatk/jgeno_pip.sh
