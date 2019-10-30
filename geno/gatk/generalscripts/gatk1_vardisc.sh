@@ -1,1 +1,0 @@
-/home/jelmer/Dropbox/sc_lemurs/scripts/geno/gatk/gatk1_vardisc.sh

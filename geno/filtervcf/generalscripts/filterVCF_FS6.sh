@@ -1,1 +1,0 @@
-/home/jelmer/Dropbox/sc_lemurs/scripts/geno/filtervcf/filterVCF_FS6.sh

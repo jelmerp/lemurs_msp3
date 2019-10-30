@@ -1,0 +1,2 @@
+zgrep -v "##" /work/jwp37/radseq/seqdata/vcf/map2msp3.gatk4.paired.joint/final/msp3proj.mac1.FS6.vcf.gz | wc -l # 61562 --> 61561 sites
+zgrep -v "##" /work/jwp37/radseq/seqdata/vcf/map2msp3.gatk4.paired.joint/final/msp3proj.mac3.FS6.vcf.gz | wc -l # 34410 --> 34409 sites
