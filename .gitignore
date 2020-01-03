@@ -1,0 +1,9 @@
+old/
+seqdata/
+msp3_ms_own/
+msp3_manuscript/
+figures/
+analyses/
+.Rproj.user
+
+scripts/misc/
