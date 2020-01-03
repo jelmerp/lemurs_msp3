@@ -1,0 +1,74 @@
+fastq.file	Sample_ID	species	species.or	sp.nr	read	ID
+01-06_hely_R1_paired.fastq.gz	01-06_hely	macarthurii	macarthurii	001	0	mmac001_r99_00000
+01-07_hely_R1_paired.fastq.gz	01-07_hely	macarthurii	macarthurii	002	0	mmac002_r99_00000
+03-13_hely_R1_paired.fastq.gz	03-13_hely	macarthurii	macarthurii	003	0	mmac003_r99_00000
+04-06_hely_R1_paired.fastq.gz	04-06_hely	macarthurii	macarthurii	004	0	mmac004_r99_00000
+06-08_hely_R1_paired.fastq.gz	06-08_hely	macarthurii	macarthurii	005	0	mmac005_r99_00000
+08-08_hely_R1_paired.fastq.gz	08-08_hely	macarthurii	macarthurii	006	0	mmac006_r99_00000
+04-07_hely_R1_paired.fastq.gz	04-07_hely	mittermeieri	mittermeieri	008	0	mmit008_r99_00000
+07-06_habe_R1_paired.fastq.gz	07-06_habe	mittermeieri	mittermeieri	009	0	mmit009_r99_00000
+08-07_hely_R1_paired.fastq.gz	08-07_hely	mittermeieri	mittermeieri	010	0	mmit010_r99_00000
+10-07_hely_R1_paired.fastq.gz	10-07_hely	mittermeieri	mittermeieri	011	0	mmit011_r99_00000
+2-07_hely_R1_paired.fastq.gz	2-07_hely	mittermeieri	mittermeieri	012	0	mmit012_r99_00000
+B12_R1_paired.fastq.gz	B12	mittermeieri	mittermeieri	013	1	mmit013_r99_00000
+B12_R2_paired.fastq.gz	B12	mittermeieri	mittermeieri	013	2	mmit013_r99_00000
+B14_R1_paired.fastq.gz	B14	mittermeieri	mittermeieri	014	1	mmit014_r99_00000
+B14_R2_paired.fastq.gz	B14	mittermeieri	mittermeieri	014	2	mmit014_r99_00000
+BC3_R1_paired.fastq.gz	BC3	mittermeieri	mittermeieri	015	1	mmit015_r99_00000
+BC3_R2_paired.fastq.gz	BC3	mittermeieri	mittermeieri	015	2	mmit015_r99_00000
+C12_R1_paired.fastq.gz	C12	mittermeieri	mittermeieri	016	1	mmit016_r99_00000
+C12_R2_paired.fastq.gz	C12	mittermeieri	mittermeieri	016	2	mmit016_r99_00000
+C23_R1_paired.fastq.gz	C23	mittermeieri	mittermeieri	017	1	mmit017_r99_00000
+C23_R2_paired.fastq.gz	C23	mittermeieri	mittermeieri	017	2	mmit017_r99_00000
+C24_R1_paired.fastq.gz	C24	mittermeieri	mittermeieri	018	1	mmit018_r99_00000
+C24_R2_paired.fastq.gz	C24	mittermeieri	mittermeieri	018	2	mmit018_r99_00000
+PBZT115_R1_paired.fastq.gz	PBZT115	mittermeieri	mittermeieri	019	1	mmit019_r99_00000
+PBZT115_R2_paired.fastq.gz	PBZT115	mittermeieri	mittermeieri	019	2	mmit019_r99_00000
+A01_2014_R1_paired.fastq.gz	A01_2014	simmonsi	simmonsi	001	1	msim001_r99_00000
+A01_2014_R2_paired.fastq.gz	A01_2014	simmonsi	simmonsi	001	2	msim001_r99_00000
+A02_2014_R1_paired.fastq.gz	A02_2014	simmonsi	simmonsi	002	1	msim002_r99_00000
+A02_2014_R2_paired.fastq.gz	A02_2014	simmonsi	simmonsi	002	2	msim002_r99_00000
+A03_2014_R1_paired.fastq.gz	A03_2014	simmonsi	simmonsi	003	1	msim003_r99_00000
+A03_2014_R2_paired.fastq.gz	A03_2014	simmonsi	simmonsi	003	2	msim003_r99_00000
+A08_2014_R1_paired.fastq.gz	A08_2014	simmonsi	simmonsi	004	1	msim004_r99_00000
+A08_2014_R2_paired.fastq.gz	A08_2014	simmonsi	simmonsi	004	2	msim004_r99_00000
+BET87_R1_paired.fastq.gz	BET87	simmonsi	simmonsi	005	1	msim005_r99_00000
+BET87_R2_paired.fastq.gz	BET87	simmonsi	simmonsi	005	2	msim005_r99_00000
+PBZT117_R1_paired.fastq.gz	PBZT117	simmonsi	simmonsi	006	1	msim006_r99_00000
+PBZT117_R2_paired.fastq.gz	PBZT117	simmonsi	simmonsi	006	2	msim006_r99_00000
+POLO5.22_R1_paired.fastq.gz	POLO5.22	simmonsi	simmonsi	007	1	msim007_r99_00000
+POLO5.22_R2_paired.fastq.gz	POLO5.22	simmonsi	simmonsi	007	2	msim007_r99_00000
+ZAH2_R1_paired.fastq.gz	ZAH2	simmonsi	simmonsi	008	1	msim008_r99_00000
+ZAH2_R2_paired.fastq.gz	ZAH2	simmonsi	simmonsi	008	2	msim008_r99_00000
+ZAH5_R1_paired.fastq.gz	ZAH5	simmonsi	simmonsi	009	1	msim009_r99_00000
+ZAH5_R2_paired.fastq.gz	ZAH5	simmonsi	simmonsi	009	2	msim009_r99_00000
+B23_R1_paired.fastq.gz	B23	spp	sp. - mananara nord	016	1	mspp016_r99_00000
+B23_R2_paired.fastq.gz	B23	spp	sp. - mananara nord	016	2	mspp016_r99_00000
+B24_R1_paired.fastq.gz	B24	spp	sp. - mananara nord	017	1	mspp017_r99_00000
+B24_R2_paired.fastq.gz	B24	spp	sp. - mananara nord	017	2	mspp017_r99_00000
+B34_R1_paired.fastq.gz	B34	spp	sp. - mananara nord	018	1	mspp018_r99_00000
+B34_R2_paired.fastq.gz	B34	spp	sp. - mananara nord	018	2	mspp018_r99_00000
+BC2_R1_paired.fastq.gz	BC2	spp	sp. - mananara nord	019	1	mspp019_r99_00000
+BC2_R2_paired.fastq.gz	BC2	spp	sp. - mananara nord	019	2	mspp019_r99_00000
+01-13_hely_R1_paired.fastq.gz	01-13_hely	spp	sp. nov.#3	020	0	mspp020_r99_00000
+04-13_hely_R1_paired.fastq.gz	04-13_hely	spp	sp. nov.#3	021	0	mspp021_r99_00000
+05-08_hely_R1_paired.fastq.gz	05-08_hely	spp	sp. nov.#3	022	0	mspp022_r99_00000
+07-08_hely_R1_paired.fastq.gz	07-08_hely	spp	sp. nov.#3	023	0	mspp023_r99_00000
+A12_R1_paired.fastq.gz	A12	spp	sp. nov.#3	024	1	mspp024_r99_00000
+A12_R2_paired.fastq.gz	A12	spp	sp. nov.#3	024	2	mspp024_r99_00000
+A13_R1_paired.fastq.gz	A13	spp	sp. nov.#3	025	1	mspp025_r99_00000
+A13_R2_paired.fastq.gz	A13	spp	sp. nov.#3	025	2	mspp025_r99_00000
+A23_R1_paired.fastq.gz	A23	spp	sp. nov.#3	026	1	mspp026_r99_00000
+A23_R2_paired.fastq.gz	A23	spp	sp. nov.#3	026	2	mspp026_r99_00000
+A24_R1_paired.fastq.gz	A24	spp	sp. nov.#3	027	1	mspp027_r99_00000
+A24_R2_paired.fastq.gz	A24	spp	sp. nov.#3	027	2	mspp027_r99_00000
+A34_R1_paired.fastq.gz	A34	spp	sp. nov.#3	028	1	mspp028_r99_00000
+A34_R2_paired.fastq.gz	A34	spp	sp. nov.#3	028	2	mspp028_r99_00000
+AB1_R1_paired.fastq.gz	AB1	spp	sp. nov.#3	029	1	mspp029_r99_00000
+AB1_R2_paired.fastq.gz	AB1	spp	sp. nov.#3	029	2	mspp029_r99_00000
+B13_R1_paired.fastq.gz	B13	spp	sp. nov.#3	030	1	mspp030_r99_00000
+B13_R2_paired.fastq.gz	B13	spp	sp. nov.#3	030	2	mspp030_r99_00000
+BC1_R1_paired.fastq.gz	BC1	spp	sp. nov.#3	031	1	mspp031_r99_00000
+BC1_R2_paired.fastq.gz	BC1	spp	sp. nov.#3	031	2	mspp031_r99_00000
+BD1_R1_paired.fastq.gz	BD1	spp	sp. nov.#3	032	1	mspp032_r99_00000
+BD1_R2_paired.fastq.gz	BD1	spp	sp. nov.#3	032	2	mspp032_r99_00000
