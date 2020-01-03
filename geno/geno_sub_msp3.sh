@@ -1,6 +1,6 @@
-################################################################################################################
+################################################################################
 #### INDIVIDUALS ####
-################################################################################################################
+################################################################################
 #INDS=( $(tail -n +2 metadata/sp3/sp3_r99_fastqRenamingTable.txt | cut -f 6,7 | grep "^0" | cut -f 2) ) # Only take single-end read inds
 #INDS_R01=( $(cat metadata/r01/samples/sampleIDs_sp3_yoderlab.txt) )
 #INDS_R99=( $(cat metadata/msp3/msp3_r99_IDs.txt) )
@@ -8,9 +8,9 @@
 INDS=( $(cat metadata/msp3/msp3_IDs.txt) )
 
 
-################################################################################################################
+################################################################################
 #### GENERAL SETTINGS ####
-################################################################################################################
+################################################################################
 GATK_VERSION=gatk4
 MAP2=map2msp3
 REF_DIR=/datacommons/yoderlab/users/jelmer/seqdata/reference/mnor/
@@ -19,9 +19,9 @@ REF=$REF_DIR/$REF_ID.fasta
 GVCF_DIR=/work/jwp37/radseq/seqdata/vcf/$MAP2.$GATK_VERSION.paired.ind/gvcf
 
 
-################################################################################################################
+################################################################################
 #### MAPPING SEQUENCES AND GENERATING GVCFS ####
-################################################################################################################
+################################################################################
 BASEDIR=/datacommons/yoderlab/users/jelmer/radseq
 REGIONS_FILE=$REF_DIR/$REF_ID.nonAutosomalCoords.bed
 EXCLUDE_OR_INCLUDE_REGIONS="EXCLUDE"
@@ -55,9 +55,9 @@ do
 done
 
 
-################################################################################################################
+################################################################################
 #### JOINT GENOTYPING ####
-################################################################################################################
+################################################################################
 SCAFFOLD_FILE=$REF_DIR/$REF_ID.scaffoldList.txt
 INCREMENT=1
 START_AT=1
@@ -77,8 +77,8 @@ scripts/genotyping/gatk/geno_pip_joint_gatk4.sh $FILE_ID $SCAFFOLD_FILE $INCREME
 	$REF "$ADD_COMMANDS" $MEM_JOB $MEM_GATK $NCORES ${INDS[@]}
 
 
-################################################################################################################
-################################################################################################################
+################################################################################
+################################################################################
 # rsync -r --verbose /home/jelmer/Dropbox/sc_lemurs/radseq/scripts/ jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/scripts/ 
 # rsync -r --verbose /home/jelmer/Dropbox/sc_lemurs/radseq/metadata/ jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/metadata/
 # rsync -r --verbose jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/log_sp3/bamcomp.txt /home/jelmer/Dropbox/sc_lemurs/radseq/analyses/man_sp3

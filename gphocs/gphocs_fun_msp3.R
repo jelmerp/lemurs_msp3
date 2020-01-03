@@ -1,6 +1,6 @@
-################################################################################################
+################################################################################
 ##### PREP DATAFRAME FOR DEMOGRAPHY PLOT - EASTWEST RUNS #####
-################################################################################################
+################################################################################
 tt.prep.eastwest <- function(tt, x.even = FALSE,
                              pops.fixed = NULL, pops.fixed.size = 1,
                              summary.provided = FALSE,
@@ -49,9 +49,9 @@ tt.prep.eastwest <- function(tt, x.even = FALSE,
 }
 
 
-################################################################################################
+################################################################################
 ##### PREP DATAFRAME FOR DEMOGRAPHY PLOT - SNAPP12 RUNS #####
-################################################################################################
+################################################################################
 tt.prep.snapp12 <- function(tt, x.even = FALSE,
                             pops.fixed = NULL, pops.fixed.size = 1,
                             summary.provided = FALSE,
@@ -112,9 +112,9 @@ tt.prep.snapp12 <- function(tt, x.even = FALSE,
   return(tt)
 }
 
-################################################################################################
+################################################################################
 ##### DEMOGRAPHY PLOT WRAPPER FOR EASTWEST RUNS #####
-################################################################################################
+################################################################################
 dplotwrap.eastwest <- function(runID.focal, plot.save = TRUE) {
   #runID.focal <- 'noMig'
 
@@ -153,9 +153,9 @@ dplotwrap.eastwest <- function(runID.focal, plot.save = TRUE) {
 }
 
 
-################################################################################################
+################################################################################
 ##### DEMOGRAPHY PLOT WRAPPER FOR SNAPP12 RUNS #####
-################################################################################################
+################################################################################
 dplotwrap.snapp12 <- function(runID.focal,
                               y.max = NULL,
                               rm.y.ann = FALSE,
@@ -227,9 +227,78 @@ dplotwrap.snapp12 <- function(runID.focal,
 }
 
 
-################################################################################################
+dplotwrap.snapp12.nomur <- function(runID.focal,
+                              y.max = NULL,
+                              rm.y.ann = FALSE,
+                              ylab = 'time (ka ago)',
+                              xlab = expression(N[e] ~ "(1 tick mark = 25k)"),
+                              pops.remove = c('mur', 'anc.root'),
+                              legend.plot = TRUE,
+                              legend.labs = NULL,
+                              plot.title = NULL,
+                              plot.save = FALSE) {
+  # runID.focal <- 'noMig'; plot.title = NULL; y.max = NULL; ylab = 'time (ka ago)'; rm.y.ann = FALSE
+  # xlab = expression(N[e] ~ "(1 tick mark = 25k)"); legend.plot = FALSE; legend.labs = NULL
+
+  if(is.null(plot.title)) plot.title <- paste0(setID, ': ', runID.focal)
+
+  ## Dataframe for plotting:
+  (tt <- subset(Log, runID == runID.focal) %>%
+      subset(var %in% c('theta', 'tau')) %>%
+      group_by(pop, var) %>%
+      dplyr::summarise(cval.mean = mean(cval / 1000)) %>%
+      dcast(pop ~ var))
+  ttp <- tt.prep.snapp12(tt, x.even = FALSE, pop.spacing = 25, summary.provided = TRUE)
+
+  ## Factors for correct legend ordering:
+  ttp$pop <- factor(ttp$pop, levels = levels(Log$pop))
+  ttp <- arrange(ttp, pop)
+  ttp$popcol <- factor(ttp$popcol, levels = ttp$popcol)
+
+  if(!is.null(pops.remove))ttp <- ttp %>% filter(!pop %in% pops.remove)
+
+  ## Main plot:
+  (p <- dplot(tt = ttp, y.max = y.max, rm.y.ann = rm.y.ann, ylab = ylab, xlab = xlab,
+              legend.plot = legend.plot, legend.labs = legend.labs,
+              ann.pops = FALSE, x.min = 0, yticks.by = 100,
+              popnames.adj.horz = rep(0, nrow(ttp)), popnames.adj.vert = 15,
+              popnames.col = popnames.col, popnames.size = 5, x.extra = 25,
+              saveplot = FALSE, plot.title = plot.title))
+
+  p <- p + theme(panel.grid.minor.x = element_blank(),
+                 panel.grid.major.x = element_blank(),
+                 panel.grid.minor.y = element_blank(),
+                 axis.title.x = element_text(margin = margin(t = 30, r = 0, b = 0, l = 0)))
+
+  ## Connecting lines:
+  p <- p + geom_segment(aes(y = ttp$y.max[ttp$pop == 'anc.LIS'],
+                            yend = ttp$y.max[ttp$pop == 'anc.LIS'],
+                            x = ttp$x.max[ttp$pop == 'anc.A3'],
+                            xend = ttp$x.min[ttp$pop == 'anc.LIS']),
+                        colour = 'grey50')
+  p <- p + geom_segment(aes(y = ttp$y.max[ttp$pop == 'sim'],
+                            yend = ttp$y.max[ttp$pop == 'sim'],
+                            x = ttp$x.max[ttp$pop == 'anc.LI'],
+                            xend = ttp$x.min[ttp$pop == 'sim']),
+                        colour = 'grey50')
+
+  ## Save plot:
+  if(plot.save == TRUE) {
+    plotfile <- paste0(plotdir, '/demo/', setID, '.', runID.focal, '.demoplot.png')
+    ggsave(filename = plotfile, plot = p, width = 8, height = 7)
+    system(paste("xdg-open", plotfile))
+
+    plotfile.pdf <- paste0(plotdir, '/demo/', setID, '.', runID.focal, '.demoplot.pdf')
+    ggsave(filename = plotfile.pdf, plot = p, width = 8, height = 7)
+  }
+
+  #print(p)
+  return(p)
+}
+
+################################################################################
 ##### PREP GPHOCS RESULTS FOR MSMC COMPARISON PLOT #####
-################################################################################################
+################################################################################
 prep.gphocsNe <- function(Log.subset, setID) {
   (gphocsNe <- tt.prep.eastwest(Log.subset) %>%
      dplyr::select(pop, tau, theta) %>%

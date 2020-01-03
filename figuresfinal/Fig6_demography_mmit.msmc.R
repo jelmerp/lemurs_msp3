@@ -4,7 +4,7 @@
 setwd('/home/jelmer/Dropbox/sc_lemurs/')
 
 ## Scripts:
-source('scripts/gphocs/gphocs_6_analyze_fun.R')
+source('scripts/gphocs/gphocs_plot_fun.R')
 source('proj/msp3/scripts/gphocs/gphocs_fun_msp3.R')
 source('scripts/msmc/msmc_processOutput_fun.R')
 

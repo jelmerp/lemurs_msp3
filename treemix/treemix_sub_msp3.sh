@@ -1,8 +1,8 @@
 #mkdir -p analyses/trees/treemix/output analyses/trees/treemix/input analyses/trees/treemix/popfiles
 
-#####################################################################################################
+################################################################################
 ##### RUN TREEMIX #####
-#####################################################################################################
+################################################################################
 
 ## General settings:
 MAP2=map2msp3
@@ -29,7 +29,7 @@ scripts/trees/treemix_pip.sh $FILE_ID $VCF_DIR $PREP_INPUT $MINMIG $MAXMIG $ROOT
 
 	
 	
-#########################################################################################################################
+################################################################################
 ### Copy files:
 # rsync -r --verbose /home/jelmer/Dropbox/sc_lemurs/radseq/metadata/* jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/metadata/
 # rsync -r --verbose /home/jelmer/Dropbox/sc_lemurs/radseq/analyses/trees/treemix/popfiles/* jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/analyses/trees/treemix/popfiles/

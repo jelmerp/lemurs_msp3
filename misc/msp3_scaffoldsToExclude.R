@@ -1,4 +1,3 @@
-rm(list = ls())
 setwd('/home/jelmer/Dropbox/sc_lemurs/')
 library(tidyverse)
 

@@ -59,8 +59,8 @@ scripts/admixtools/admixtools_pip.sh $FILE_ID $VCF_DIR $PLINK_DIR $ATOOLS_DIR $I
 
 
 
-########################################################################################################################################################################
-########################################################################################################################################################################
+################################################################################
+################################################################################
 # rsync -r --verbose jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/analyses/admixtools/output/* /home/jelmer/Dropbox/sc_lemurs/radseq/analyses/admixtools/output/
 # scp /home/jelmer/Dropbox/sc_lemurs/radseq/analyses/admixtools/input/* jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/analyses/admixtools/input/
 

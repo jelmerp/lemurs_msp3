@@ -1,5 +1,4 @@
 ##### SET-UP #####
-rm(list = ls()); gc()
 setwd('/home/jelmer/Dropbox/sc_lemurs/radseq/')
 library(gdata); library(tidyverse)
 

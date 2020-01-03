@@ -1,15 +1,15 @@
-####################################################################################################
+################################################################################
 ##### SCAFFOLDS #####
-####################################################################################################
+################################################################################
 grep ">" /datacommons/yoderlab/users/jelmer/singlegenomes/seqdata/reference/mnor/mnor.scaffolds.fasta > tmp.txt
 cat tmp.txt | sed 's/>//g' > /datacommons/yoderlab/users/jelmer/singlegenomes/metadata/refgenome/mnor/mnor.scaffolds.txt
 rm tmp.txt
 cat $SCAFFOLDS | sed 's/scaffold.*size//g' > /datacommons/yoderlab/users/jelmer/singlegenomes/metadata/refgenome/mnor/mnor.scaffoldSizes.txt
 
 
-####################################################################################################
+################################################################################
 ##### JUST GET BAMSTATS #####
-####################################################################################################
+################################################################################
 IDs=( mspp002_r01_p3c01 mspp003_r01_p3d09 mspp004_r01_p1c06 mspp005_r01_p3d05 mspp006_r01_p2g01 mspp007_r01_p3f01 mspp008_r01_p3f05 mspp009_r01_p2g09 mspp010_r01_p3c02 )
 REF=/datacommons/yoderlab/users/jelmer/singlegenomes/seqdata/reference/mnor.scaffolds.fasta
 BAM_DIR=/work/jwp37/radseq/seqdata/bam/mapped2msp3/paired
@@ -37,9 +37,9 @@ do
 done
 
 
-####################################################################################################
+################################################################################
 #### CORRECT BAM HEADER OF R99 FILES ####
-####################################################################################################
+################################################################################
 SAMTOOLS=/datacommons/yoderlab/programs/samtools-1.6/samtools
 BAM_DIR=/work/jwp37/radseq/seqdata/bam/mapped2msp3/paired
 INDS_R99=( $(cat metadata/jordi.runs/20181008_sp3_IDs.txt) )
@@ -53,9 +53,9 @@ do
 done
 
 
-####################################################################################################
+################################################################################
 #### MAPPING MTDNA ONLY ####
-####################################################################################################
+################################################################################
 REF=/datacommons/yoderlab/users/jelmer/seqdata/mmur_mtdna/mtdna_genome.fa
 INDS_R01=( $(cat metadata/r01/samples/sampleIDs_sp3_yoderlab.txt) )
 INDS=( "${INDS_R01[@]}" "${INDS_R99[@]}" )

@@ -1,7 +1,6 @@
-###############################################################################################
+################################################################################
 ##### SET-UP #####
-###############################################################################################
-rm(list = ls()); gc()
+################################################################################
 setwd('/home/jelmer/Dropbox/sc_lemurs/radseq/analyses/trees/treemix/')
 source('/home/jelmer/Dropbox/sc_lemurs/radseq/scripts/trees/treemix_plotting_funcs.R') # Script that comes with Treemix
 source('/home/jelmer/Dropbox/sc_lemurs/radseq/scripts/trees/treemix_plotFun.R') # My script
@@ -24,43 +23,43 @@ poporder.file <- paste0('popfiles/', file.ID, '_poporder.txt')
 writeLines(poporder, poporder.file)
 
 
-###############################################################################################
+################################################################################
 ##### PROPORTION OF VARIANCE EXPLAINED #####
-###############################################################################################
+################################################################################
 cat('Df with proportion of variance explained: \n')
 (propVar.df <- get.propVar.df(file.ID, dir.output, root))
 propVar.plot <- plot.propVar(propVar.df, file.ID, dir.fig, file.open = TRUE)
 
 
-###############################################################################################
+################################################################################
 ##### LIKELIHOOD PLOT AND LRT #####
-###############################################################################################
+################################################################################
 cat('Df with likelihoods: \n')
 llh.df <- get.llh.df(file.ID, root, nmig.vector, dir.output)
 llh.plot <- plot.llh(llh.df, file.ID, dir.fig, file.open = TRUE)
 
 
-###############################################################################################
+################################################################################
 ##### TREE PLOT FOR EACH VALUE OF M #####
-###############################################################################################
+################################################################################
 cat('Plotting trees: \n')
 sapply(nmig.vector, plot.tree,
        file.ID, root, dir.output, dir.fig,
        png.background = 'white', file.open = file.open, filetype = 'png')
 
 
-###############################################################################################
+################################################################################
 ##### PLOT RESIDUALS #####
-###############################################################################################
+################################################################################
 ## Positive residuals: candidates for admixture
 sapply(nmig.vector, plot.residuals,
        file.ID, poporder.file, dir.output, dir.figs, file.open = file.open)
 #plot.residuals(0, file.ID, poporder.file, dir.output, dir.figs)
 
 
-###############################################################################################
+################################################################################
 ##### COMBINE PLOTS #####
-###############################################################################################
+################################################################################
 library(png); library(grid)
 treemix.plot.file <- 'figures/msp3proj.mac3.FS6.nmig3.rootmmur.png'
 treemix.plot <- rasterGrob(readPNG(treemix.plot.file), interpolate = TRUE)

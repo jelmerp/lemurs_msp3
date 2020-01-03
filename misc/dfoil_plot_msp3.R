@@ -1,7 +1,6 @@
 ################################################################################
 ##### SET-UP #####
 ################################################################################
-rm(list = ls()); gc()
 setwd('/home/jelmer/Dropbox/sc_lemurs/radseq/')
 library(plyr); library(reshape2); library(tidyverse)
 source('scripts/dfoil/dfoil_plot_fun.R')

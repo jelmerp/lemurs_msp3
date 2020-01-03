@@ -33,8 +33,8 @@ done
 
 
 
-####################################################################################################
-####################################################################################################
+################################################################################
+################################################################################
 # rsync -avr jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/proj/msp3/analyses/gphocs/output/* /home/jelmer/Dropbox/sc_lemurs/proj/msp3/analyses/gphocs/output/
 # rsync -avr jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/proj/msp3/analyses/gphocs/input/*gphocsInput.txt /home/jelmer/Dropbox/sc_lemurs/proj/msp3/analyses/gphocs/input/
 
@@ -47,7 +47,7 @@ done
 # find gphocs_logfiles/* -maxdepth 1 -mmin +$((5)) -exec rm -f {} \;
 
 
-####################################################################################################
+################################################################################
 ## To change max nr of migration bands: Changed "#define MAX_MIGS 10" in src/path.h to max 20.
 
 ## If nr of loci given in first line of file is 0, because ls didn't work (too many files), then:

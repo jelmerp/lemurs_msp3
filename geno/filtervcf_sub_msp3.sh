@@ -1,6 +1,6 @@
 #rsync --verbose -r jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/radseq/analyses/qc/vcf/mapped2msp3/gatk4/filtering/*filterstats /home/jelmer/Dropbox/sc_lemurs/radseq/analyses/qc/vcf/gatk/mapped2msp3/filtering/
 
-################################################################################################################
+################################################################################
 #### GENERAL SETTINGS ####
 FILE_ID=msp3proj
 GATK_VERSION=gatk4
@@ -13,7 +13,7 @@ REF_ID=mnor.stitched100M
 REF=$REF_DIR/$REF_ID.fasta
 
 
-################################################################################################################
+################################################################################
 #### GPHOCS DATASET ####
 SUBSET_ID=eastwest
 INPUT_NAME=$FILE_ID.rawSNPs
@@ -33,7 +33,7 @@ scripts/filtering/filterVCF_FS6_pip.sh $INPUT_NAME $OUTPUT_NAME $VCF_DIR_MAIN $V
 	$SKIP_COMMON_STEPS $SKIP_FINAL_STEPS $SKIP_IN_PIP
 
 	
-################################################################################################################
+################################################################################
 #### SNAPP12 DATASET ####
 INPUT_NAME=$FILE_ID.rawSNPs.ABHet
 OUTPUT_NAME=$FILE_ID.snapp12
@@ -51,7 +51,7 @@ scripts/filtering/filterVCF_FS6_pip.sh $INPUT_NAME $OUTPUT_NAME $VCF_DIR_MAIN $V
 	$SKIP_COMMON_STEPS $SKIP_FINAL_STEPS $SKIP_IN_PIP
 
 
-################################################################################################################
+################################################################################
 #### SNAPP22 DATASET ####
 INPUT_NAME=$FILE_ID.rawSNPs.ABHet
 OUTPUT_NAME=$FILE_ID.snapp22
@@ -69,7 +69,7 @@ scripts/filtering/filterVCF_FS6_pip.sh $INPUT_NAME $OUTPUT_NAME $VCF_DIR_MAIN $V
 	$SKIP_COMMON_STEPS $SKIP_FINAL_STEPS $SKIP_IN_PIP
 	
 	                                                          
-################################################################################################################
+################################################################################
 #### ALL INDS ####
 INPUT_NAME=$FILE_ID.rawSNPs.ABHet
 OUTPUT_NAME=$FILE_ID

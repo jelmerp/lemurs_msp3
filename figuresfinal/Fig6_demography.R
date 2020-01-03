@@ -1,22 +1,22 @@
 ################################################################################
 #### SET-UP #####
 ################################################################################
-setwd('/home/jelmer/Dropbox/sc_lemurs/')
+setwd('/home/jelmer/Dropbox/sc_lemurs/proj/msp3/')
 
 ## Scripts:
-source('scripts/gphocs/gphocs_6_analyze_fun.R')
-source('msp3/scripts/gphocs/gphocs_fun_msp3.R')
-source('scripts/msmc/msmc_processOutput_fun.R')
+source('/home/jelmer/Dropbox/sc_lemurs/scripts/gphocs/gphocs_plot_fun.R')
+source('/home/jelmer/Dropbox/sc_lemurs/scripts/msmc/msmc_processOutput_fun.R')
+source('scripts/gphocs/gphocs_fun_msp3.R')
 
 ## Files:
-infile_gphocsLog <- 'msp3/analyses/gphocs/output/msp3_snapp12/mergedLogs.txt'
-infile_bppLog <- 'msp3/analyses/bpp/bppLog.txt'
-infile_gphocsLog2 <- 'msp3/analyses/gphocs/output/msp3_eastwest2/mergedLogs.txt' # Ne plot
-msmc.filedir <- 'singlegenomes/analyses/msmc/output/samtools/ind/'
-infile_popcols <- 'msp3/analyses/gphocs/popInfo/ghocs_cols.txt'
-infile_pops <- 'msp3/analyses/gphocs/popInfo/ghocs_pops.txt'
-infile_popcols2 <- 'metadata/colors/popcols.txt'
-figfile_eps <- paste0('msp3/figures_final/Fig6_demography2.eps')
+infile_gphocsLog <- 'analyses/gphocs/output/msp3_snapp12/mergedLogs.txt'
+infile_bppLog <- 'analyses/bpp/bppLog.txt'
+infile_gphocsLog2 <- 'analyses/gphocs/output/msp3_eastwest2/mergedLogs.txt' # Ne plot
+infile_popcols <- 'analyses/gphocs/popInfo/ghocs_cols.txt'
+infile_pops <- 'analyses/gphocs/popInfo/ghocs_pops.txt'
+figfile_eps <- paste0('figuresfinal/Fig6_demography2.eps')
+msmc.filedir <- '/home/jelmer/Dropbox/sc_lemurs/proj/wgs/analyses/msmc/output/samtools/ind/'
+infile_popcols2 <- '/home/jelmer/Dropbox/sc_lemurs/metadata/colors/popcols.txt'
 
 ## Set ID:
 setID <- 'msp3_bppComp'
@@ -105,27 +105,11 @@ m_sp3mac_label <- paste0(m_sp3mac * 100, '%')
               max = round(hpd.max(cval) / 1000)) %>%
     arrange(pop))
 
-(th.sum <- filter(Log, var == 'theta') %>%
-    group_by(pop) %>%
-    summarise(Ne = round(mean(cval) / 1000),
-              min = round(hpd.min(cval) / 1000),
-              max = round(hpd.max(cval) / 1000)) %>%
-    arrange(pop))
-
-(th.sum <- filter(Log_eastwest2, var == 'theta') %>%
-    group_by(pop) %>%
-    summarise(Ne = round(mean(cval) / 1000),
-              min = round(hpd.min(cval) / 1000),
-              max = round(hpd.max(cval) / 1000)) %>%
-    arrange(pop))
-
-#th.sum %>% filter(pop == 'anc.LISA3')
-
 
 ################################################################################
 #### DEMO PLOTS #####
 ################################################################################
-p_bpp <- dplotwrap.snapp12('bpp',
+(p_bpp <- dplotwrap.snapp12('bpp',
                            y.max = 1150,
                            rm.y.ann = FALSE,
                            legend.plot = FALSE,
@@ -135,9 +119,9 @@ p_bpp <- dplotwrap.snapp12('bpp',
         axis.title.y = element_text(margin = margin(0, 0.1, 0, 0, 'cm')),
         panel.border = element_rect(colour = "grey20", fill = NA, size = 1),
         plot.title = element_text(size = 22, face = 'plain'),
-        plot.margin = margin(0.5, 0.4, 0.2, 0.4, 'cm'))
+        plot.margin = margin(0.5, 0.4, 0.2, 0.4, 'cm')))
 
-p_iso <- dplotwrap.snapp12('noMig',
+(p_iso <- dplotwrap.snapp12('noMig',
                            y.max = 1150,
                            rm.y.ann = TRUE,
                            legend.plot = FALSE,
@@ -145,9 +129,9 @@ p_iso <- dplotwrap.snapp12('noMig',
   scale_y_continuous(breaks = seq(0, 2000, by = 200), expand = c(0, 0)) +
   theme(panel.border = element_rect(colour = "grey20", fill = NA, size = 1),
         plot.title = element_text(size = 22, face = 'plain'),
-        plot.margin = margin(0.5, 0.4, 0.2, 0.4, 'cm'))
+        plot.margin = margin(0.5, 0.4, 0.2, 0.4, 'cm')))
 
-p_mig <- dplotwrap.snapp12('multmig1',
+(p_mig <- dplotwrap.snapp12('multmig1',
                            y.max = 1150,
                            rm.y.ann = TRUE,
                            legend.plot = FALSE,
@@ -170,7 +154,7 @@ p_mig <- dplotwrap.snapp12('multmig1',
                              angle = 45, type = 'closed')) +
   geom_label(aes(x = 180, y = 160, label = m_mit2leh_label),
              fontface = 'bold', label.size = 0, size = 6,
-             colour = 'gray10', fill = 'gray80', alpha = 0.7)
+             colour = 'gray10', fill = 'gray80', alpha = 0.7))
 
 
 ################################################################################

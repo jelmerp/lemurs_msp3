@@ -26,5 +26,5 @@ head -n 1 $FILE_STATS > $FILE_STATS_ALL
 
 
 
-################################################################################################################
+################################################################################
 #rsync -avr jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/msp3/analyses/vcf2fullFasta/locusStats.msp3proj.snapp12.amas/*AmasStats.txt /home/jelmer/Dropbox/sc_lemurs/msp3/analyses/vcf2fullFasta/
