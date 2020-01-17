@@ -8,7 +8,7 @@ setwd('/home/jelmer/Dropbox/sc_lemurs/msp3/')
 setID <- 'msp3_eastwest2'
 
 ## Scripts:
-source('/home/jelmer/Dropbox/sc_lemurs/scripts/gphocs/gphocs_6_analyze_fun.R')
+source('/home/jelmer/Dropbox/scripts/genomics/gphocs/gphocs_6_analyze_fun.R')
 source('scripts/gphocs/gphocs_fun_msp3.R')
 
 ## Files and dirs:

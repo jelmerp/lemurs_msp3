@@ -41,7 +41,7 @@ done
 # rsync -avr /home/jelmer/Dropbox/sc_lemurs/proj/msp3/analyses/gphocs/controlfiles/ jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/proj/msp3/analyses/gphocs/controlfiles/
 # rsync -avr /home/jelmer/Dropbox/sc_lemurs/proj/msp3/analyses/gphocs/indsel/ jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/proj/msp3/analyses/gphocs/indsel/
 
-# rsync -avr /home/jelmer/Dropbox/sc_lemurs/scripts/ jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/scripts/
+# rsync -avr /home/jelmer/Dropbox/scripts/genomics/ jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/scripts/genomics/
 
 # find analyses/gphocs/output/*log* -maxdepth 1 -mmin +$((5)) -exec rm -f {} \;
 # find gphocs_logfiles/* -maxdepth 1 -mmin +$((5)) -exec rm -f {} \;

@@ -4,8 +4,8 @@
 setwd('/home/jelmer/Dropbox/sc_lemurs/proj/msp3/')
 
 ## Scripts:
-source('/home/jelmer/Dropbox/sc_lemurs/scripts/gphocs/gphocs_plot_fun.R')
-source('/home/jelmer/Dropbox/sc_lemurs/scripts/msmc/msmc_processOutput_fun.R')
+source('/home/jelmer/Dropbox/scripts/genomics/gphocs/gphocs_plot_fun.R')
+source('/home/jelmer/Dropbox/scripts/genomics/msmc/msmc_processOutput_fun.R')
 source('scripts/gphocs/gphocs_fun_msp3.R')
 
 ## Files:

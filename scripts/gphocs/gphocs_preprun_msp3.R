@@ -12,7 +12,7 @@ setwd('/home/jelmer/Dropbox/sc_lemurs/proj/sisp/analyses/gphocs/')
 fileID <- 'maemamsam.gphocs1'
 
 ## Scripts and dirs:
-source('/home/jelmer/Dropbox/sc_lemurs/scripts/gphocs/gphocs_controlfiles_fun.R')
+source('/home/jelmer/Dropbox/scripts/genomics/gphocs/gphocs_controlfiles_fun.R')
 dir.source <- paste0('controlfiles/master/', fileID, '/')
 dir.target <- paste0('controlfiles/reps/', fileID, '/')
 pattern.focal <- 'ctrl'

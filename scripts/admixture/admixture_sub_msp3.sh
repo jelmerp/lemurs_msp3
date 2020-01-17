@@ -10,7 +10,7 @@ MAF=0; LD_MAX=1; NCORES=1
 INDFILE=metadata/indsel/msp3_noMur.txt
 bcftools query -l $VCF_DIR/$FILE_ID.vcf.gz | grep -v "mmur" > $INDFILE
 sbatch -p common,yoderlab,scavenger --mem 8G -o slurm.admixturePip.$FILE_ID \
-	/datacommons/yoderlab/users/jelmer/scripts/admixture/admixture_pip.sh $FILE_ID $VCF_DIR $PLINK_DIR $OUTDIR $MAF $LD_MAX $NCORES $INDFILE
+	/datacommons/yoderlab/users/jelmer/scripts/genomics/admixture/admixture_pip.sh $FILE_ID $VCF_DIR $PLINK_DIR $OUTDIR $MAF $LD_MAX $NCORES $INDFILE
 
 ## Msp3 - mac3:
 FILE_ID=msp3proj.mac3.FS6
