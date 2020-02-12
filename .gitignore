@@ -7,3 +7,5 @@ analyses/
 .Rproj.user
 
 scripts/misc/
+fig/
+scripts/genomics_link
