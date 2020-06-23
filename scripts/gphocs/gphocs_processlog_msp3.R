@@ -1,62 +1,70 @@
-################################################################################
-##### SET-UP #####
-################################################################################
-## G-phocs run / setID:
-#logdir <- 'msp3/analyses/gphocs/output/msp3_snapp12/'; setID <- 'msp3_snapp12'
-#logdir <- 'msp3/analyses/gphocs/output/msp3_eastwest2/'; setID <- 'msp3_eastwest2'
-logdir <- 'msp3/analyses/gphocs/output/msp3_eastwest2p/'; setID <- 'msp3_eastwest2'
-
-wd <- '/home/jelmer/Dropbox/sc_lemurs/'
-
-## Scipts:
-script_processlog <- 'scripts/gphocs/gphocs_5_processlog_fun.R'
+#### SET-UP --------------------------------------------------------------------
+library(here)
+source(here('scripts/genomics/gphocs/gphocs_processlogs_fun.R'))
 
 ## Input and output files:
-infile_pop.lookup <- 'msp3/analyses/gphocs/popInfo/ghocs_popAbbrev.txt'
-infile_pops <- 'msp3/analyses/gphocs/popInfo/ghocs_pops.txt'
-outfile_log <- paste0(logdir, '/mergedLogs.txt')
+infile_lookup <- here('metadata/msp3_gphocs_pop-abbrev.txt')
+logdir_base <- here('analyses/gphocs/output/')
 
 ## Variables:
-gentime_mean <- 3.5
-gentime_sd <- 0.15
-mutrate.gen_mean <- 1.64e-8
-mutrate.gen_sd <- 0.08e-8
-m.scale <- 1000
-t.scale <- 0.0001
-burnIn <- 70000
-subSample <- 50
-lastSample <- NULL
-
-## Process:
-setwd(wd)
-source(script_processlog)
-
-pop.lookup <- read.delim(infile_pop.lookup, header = TRUE, as.is = TRUE)
-pops <- read.delim(infile_pops, header = TRUE, as.is = TRUE)
+set.seed(7643)
+primate_mutrates <- c(0.94, 0.81, 1.1, 1.2, 1.3, 1.6, 1.7) # (multiplied by 1e-8)
+gentime <- 3.5 # generation time
+gentime_sd <- 1.16 # SD for generation time
+mutrate_gen <- mean(primate_mutrates) # mutation rate (will be multiplied by 1e-8)
+mutrate_var <- var(primate_mutrates) # variance for mutation rate (will be multiplied by 1e-8)
+rename_pops_before <- TRUE # Rename populations
+rename_pops_after <- TRUE # Rename populations
+m_scale <- 1000 # Gphocs scaling of m (migration rate)
+t_scale <- 0.0001 # Gphocs scaling of theta and tau
+burnin <- 70000 # Size of burn-in, to remove.
+subsample <- 50 # Subsample 1 in x samples (output lines). Default: 50
+last_sample <- NULL # Stop processing log at sample x.
 
 ## Pops:
-if(grepl('eastwest', setID))
-  pop.lookup$popname.short[which(pop.lookup$popname.short == 'sp3')] <- 'anc.sp3'
-if(setID == 'msp3_eastwest2p') pops$msp3_eastwest2p <- pops$msp3_eastwest2
+lookup <- read.delim(infile_lookup, header = TRUE, as.is = TRUE)
 
-kidpops <- pops$kidpop[pops[, grep(setID, colnames(pops))] == 1]
-parentpops <- pops$parentpop[pops[, grep(setID, colnames(pops))] == 1]
-allpops <- unique(c(kidpops, parentpops))
-currentpops  <- kidpops[grep('anc', kidpops, invert = TRUE)]
+poplist_3sp <- list(sp3E = 'sp3',  sp3W = 'sp3',
+                    mac = 'anc.A3', sp3 = 'anc.A3',
+                    leh = 'anc.root', anc.A3 = 'anc.root')
 
-
-################################################################################
-##### PROCESS LOGS #####
-################################################################################
-Log <- getLogs(logdir = logdir, setID = setID,
-               burnIn = burnIn, lastSample = lastSample, subSample = subSample)
-
-Log <- Log %>%
-  dplyr::filter(!(var == 'tau' & pop == 'leh'))
+poplist_6sp <- list(mac = 'anc.A3', sp3 = 'anc.A3',
+                    leh = 'anc.LI', mit = 'anc.LI',
+                    anc.A3 = 'anc.LISA3', anc.LIS = 'anc.LISA3',
+                    anc.LI = 'anc.LIS', sim = 'anc.LIS',
+                    anc.LISA3 = 'anc.root', mur = 'anc.root')
 
 
-################################################################################
-##### WRITE FILE #####
-################################################################################
-write.table(Log, outfile_log,
-            sep = '\t', quote = FALSE, row.names = FALSE)
+#### PROCESS LOGS --------------------------------------------------------------
+## 6-species model:
+setID_6sp <- 'msp3_6sp'
+indir_6sp <- paste0(logdir_base, '/msp3_6sp/raw/')
+outdir_6sp <- paste0(logdir_base, '/msp3_6sp/processed/')
+outfile_6sp <- paste0(outdir_6sp, '/msp3_6sp_mergedlogs.txt')
+
+Log_6sp <- getlogs(
+  setID = setID_6sp, logdir = indir_6sp, burnin = burnin,
+  last_sample = last_sample, subsample = subsample,
+  mutrate_var = mutrate_var, gentime_sd = gentime_sd,
+  rename_pops_before = rename_pops_before, rename_pops_after = rename_pops_after,
+  poplist = poplist_6sp, lookup = lookup
+  )
+Log_6sp <- Log_6sp %>% filter(!(var == 'tau' & pop == 'leh'))
+write.table(Log_6sp, outfile_6sp, sep = '\t', quote = FALSE, row.names = FALSE)
+
+## 3-species model:
+setID_3sp <- 'msp3_3sp'
+indir_3sp <- paste0(logdir_base, '/msp3_3sp/raw/')
+outdir_3sp <- paste0(logdir_base, '/msp3_3sp/processed/')
+outfile_3sp <- paste0(outdir_3sp, '/msp3_3sp_mergedlogs.txt')
+
+Log_3sp <- getlogs(
+  setID = setID_3sp, logdir = indir_3sp, burnin = burnin,
+  last_sample = last_sample, subsample = subsample,
+  mutrate_var = mutrate_var, gentime_sd = gentime_sd,
+  rename_pops_before = rename_pops_before, rename_pops_after = rename_pops_after,
+  poplist = poplist_3sp, lookup = lookup
+  )
+Log_3sp <- Log_3sp %>% filter(!(var == 'tau' & pop == 'leh'))
+write.table(Log_3sp, outfile_3sp, sep = '\t', quote = FALSE, row.names = FALSE)
+

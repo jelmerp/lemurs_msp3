@@ -1,0 +1,10 @@
+pop	pop_gphocs	col
+mmac	mac	#F0E442
+msp3	sp3	#D55E00
+mmit	mit	#56B4E9
+mleh	leh	#0072B2
+msim	sim	#999999
+mmur	mur	black
+sp3N	sp3W	#ed912f
+sp3S	sp3E	#9e4905
+

@@ -1,83 +1,39 @@
-################################################################################
-##### STEP 1 - CONVERT VCF TO PLINK #####
-################################################################################
-## Msp3 - no mmur:
-FILE_ID=msp3proj.mac1.FS6
-VCF_DIR=/work/jwp37/msp3/seqdata/vcf/map2msp3.gatk4.paired.joint/final/
-PLINK_DIR=/work/jwp37/msp3/seqdata/plink
-OUTDIR=analyses/admixture/output/
-MAF=0; LD_MAX=1; NCORES=1
-INDFILE=metadata/indsel/msp3_noMur.txt
-bcftools query -l $VCF_DIR/$FILE_ID.vcf.gz | grep -v "mmur" > $INDFILE
-sbatch -p common,yoderlab,scavenger --mem 8G -o slurm.admixturePip.$FILE_ID \
-	/datacommons/yoderlab/users/jelmer/scripts/genomics/admixture/admixture_pip.sh $FILE_ID $VCF_DIR $PLINK_DIR $OUTDIR $MAF $LD_MAX $NCORES $INDFILE
+SCR_ADMIX=scripts/genomics/admixture/admixture_pip.sh
+PLINK_DIR=seqdata/plink # dir for PLINK files (to be produced)
+OUTDIR=analyses/admixture/output/ # dir for Admixture files (to be produced)
+VCF_DIR=seqdata/vcf/ # Dir with existing VCF file(s)
+SET_ID=msp3proj.all
+LOOKUP=metadata/msp3_lookup.txt
+FILE_IDS=( $SET_ID.mac1.FS6 $SET_ID.mac3.FS6 $SET_ID.mac3.FS7 $SET_ID.mac3.FS7 ) # File IDs for VCF files, VCF files should be: $VCF_DIR/$FILE_ID.vcf.gz
 
-## Msp3 - mac3:
-FILE_ID=msp3proj.mac3.FS6
-MAP2=map2msp3
-GATK_VERSION=gatk4
-VCF_DIR=/work/jwp37/msp3/seqdata/vcf/$MAP2.$GATK_VERSION.paired.joint/final 
-PLINK_DIR=/work/jwp37/msp3/seqdata/plink
-MAF=0.1
-LD_MAX=1
-scripts/conversion/vcf2plink.sh $FILE_ID $VCF_DIR $PLINK_DIR $MAF $LD_MAX $INDFILE
+INDSEL_DIR=analyses/admixture/indsel/
+mkdir -p $INDSEL_DIR
+grep -P "\tmmac\t|\tmsp3\t|\tmleh\t|\tmmit\t|\tmsim\t" $LOOKUP | cut -f 3 | sort > $INDSEL_DIR/all_allinds.txt
+grep -P "\tmmac\t|\tmsp3\t|\tmleh\t|\tmmit\t" $LOOKUP | cut -f 3 | sort > $INDSEL_DIR/bothclades_allinds.txt
+grep -P "\tmmac\t|\tmsp3\t" $LOOKUP | cut -f 3 | sort > $INDSEL_DIR/macsp3_allinds.txt
+grep -P "\tmleh\t|\tmmit\t" $LOOKUP | cut -f 3 | sort > $INDSEL_DIR/lehmit_allinds.txt
 
-## Msp3 - mac1:
-FILE_ID=msp3proj.mac1.FS6
-MAP2=map2msp3
-GATK_VERSION=gatk4
-VCF_DIR=/work/jwp37/msp3/seqdata/vcf/$MAP2.$GATK_VERSION.paired.joint/final 
-PLINK_DIR=/work/jwp37/msp3/seqdata/plink
-MAF=0
-LD_MAX=1
-scripts/conversion/vcf2plink.sh $FILE_ID $VCF_DIR $PLINK_DIR $MAF $LD_MAX $INDFILE
-
-## Only mmac & msp3 - mac 3:
-FILE_ID=msp3proj.mac3.FS6
-MAP2=map2msp3
-GATK_VERSION=gatk4
-VCF_DIR=/work/jwp37/msp3/seqdata/vcf/$MAP2.$GATK_VERSION.paired.joint/final 
-PLINK_DIR=/work/jwp37/msp3/seqdata/plink
-MAF=0
-LD_MAX=1
-INDFILE=metadata/msp3/msp3_msp3mmac.IDs.txt
-ID_OUT=$FILE_ID.msp3mmac
-scripts/conversion/vcf2plink.sh $FILE_ID $VCF_DIR $PLINK_DIR $MAF $LD_MAX $INDFILE $ID_OUT
-
-## Only mmac & msp3 - mac 1:
-FILE_ID=msp3proj.mac1.FS6
-MAP2=map2msp3
-GATK_VERSION=gatk4
-VCF_DIR=/work/jwp37/msp3/seqdata/vcf/$MAP2.$GATK_VERSION.paired.joint/final 
-PLINK_DIR=/work/jwp37/msp3/seqdata/plink
-MAF=0
-LD_MAX=1
-INDFILE=metadata/msp3/msp3_msp3mmac.IDs.txt
-ID_OUT=$FILE_ID.msp3mmac
-scripts/conversion/vcf2plink.sh $FILE_ID $VCF_DIR $PLINK_DIR $MAF $LD_MAX $INDFILE $ID_OUT
-
-
-################################################################################
-##### STEP 2 #####
-################################################################################
-for FILE_ID in msp3proj.mac3.FS6.msp3mmac msp3proj.mac1.FS6.msp3mmac
+SUBSETS=(all bothclades macsp3 lehmit)
+SUBSETS=(all)
+for FILE_ID in ${FILE_IDS[@]}
 do
-	#FILE_ID=msp3proj.mac1.FS6
-	echo $FILE_ID
-	INDIR=/work/jwp37/msp3/seqdata/plink
-	OUTDIR=analyses/admixture/output/
-	NCORES=1
-	for K in 1 2 3 4 5 6 7 8 9
+	echo -e "\n\n## File ID: $FILE_ID"
+	for SUBSET in ${SUBSETS[@]}
 	do
-	echo "K: $K"
-	sbatch -p common,yoderlab,scavenger --mem 8G --ntasks $NCORES -o slurm.runAdmixture.$FILE_ID.K$K scripts/admixture/admixture_run.sh $FILE_ID $INDIR $OUTDIR $K $NCORES
+		INDFILE=$INDSEL_DIR/${FILE_ID}_${SUBSET}_inds.txt
+		comm -12 <(bcftools query -l $VCF_DIR/$FILE_ID.vcf.gz) $INDSEL_DIR/${SUBSET}_allinds.txt > $INDFILE
+		echo -e "## Indfile: $INDFILE"
+		cat $INDFILE
+
+		sbatch -p yoderlab,common,scavenger --mem 8G -o slurm.admixture.pip.$FILE_ID.$SUBSET \
+		$SCR_ADMIX $FILE_ID $VCF_DIR $PLINK_DIR $OUTDIR -i $INDFILE -o $FILE_ID.$SUBSET
 	done
-	printf "\n"
 done
 
 
-
 ################################################################################
-# rsync -avr jwp37@dcc-slogin-02.oit.duke.edu:/datacommons/yoderlab/users/jelmer/msp3/analyses/admixture/output/* /home/jelmer/Dropbox/sc_lemurs/msp3/analyses/admixture/output/
-
-# scp jwp37@dcc-slogin-02.oit.duke.edu:/work/jwp37/msp3/seqdata/plink/* /home/jelmer/Dropbox/sc_lemurs/msp3/seqdata/plink/
+# rsync -avr --no-perms ~/Dropbox/scripts/genomics dcc:/datacommons/yoderlab/users/jelmer/scripts/genomics
+# rsync -avr --no-perms ~/Dropbox/scripts/genomics dcc:/datacommons/yoderlab/users/jelmer/proj/msp3/scripts/
+# rsync -avr --no-perms ~/Dropbox/sc_lemurs/proj/msp3/scripts/ dcc:/datacommons/yoderlab/users/jelmer/proj/msp3/scripts/
+# rsync -avr --no-perms ~/Dropbox/sc_lemurs/proj/msp3/metadata/ dcc:/datacommons/yoderlab/users/jelmer/proj/msp3/metadata/
+# rsync -avr dcc:/datacommons/yoderlab/users/jelmer/proj/msp3/analyses/admixture/output/*[Qt] ~/Dropbox/sc_lemurs/proj/msp3/analyses/admixture/output
